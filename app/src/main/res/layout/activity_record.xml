@@ -80,7 +80,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:text="Save Record"
+                    android:text="@string/save_button"
                     android:textStyle="bold"
                     android:background="@color/colorPrimary"
                     android:textColor="@android:color/white"
