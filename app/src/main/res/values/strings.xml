@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">rsauveho-SizeBook</string>
     <string name="action_settings">Settings</string>
+    <string name="name">Name</string>
+    <string name="date">Date (in)</string>
+    <string name="neck">Neck (in)</string>
+    <string name="bust">Bust (in)</string>
+    <string name="chest">Chest (in)</string>
+    <string name="waist">Waist (in)</string>
+    <string name="hip">Hip (in)</string>
+    <string name="inseam">Inseam (in)</string>
+    <string name="comment">Comment</string>
 </resources>
