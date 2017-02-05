@@ -8,8 +8,8 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.rfsh.rsauveho_sizebook.MainActivity"
-    tools:showIn="@layout/activity_main">
-    <!--android:descendantFocusability="blocksDescendants"-->
+    tools:showIn="@layout/activity_main"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/counter"

@@ -17,8 +17,7 @@ public class DateFilter implements InputFilter{
         /**
          * Regex found on http://regexlib.com/REDetails.aspx?regexp_id=763
          * credit to Michael Ash
-         * This regex handles all dates for AD years, including leap years and handles
-         * month lengths
+         * This regex handles all dates for AD years, including leap years and handles proper length of month
          */
         mPattern = Pattern.compile("^(?=\\d)(?:(?!(?:1582(?:\\.|-|\\/)10(?:\\.|-|\\/)" +
                 "(?:0?[5-9]|1[0-4]))|(?:1752(?:\\.|-|\\/)0?9(?:\\.|-|\\/)(?:0?[3-9]|1[0-3])))" +

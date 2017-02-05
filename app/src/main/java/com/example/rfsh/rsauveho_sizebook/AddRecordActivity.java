@@ -1,5 +1,6 @@
 package com.example.rfsh.rsauveho_sizebook;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -16,8 +19,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class AddRecordActivity extends AppCompatActivity {
 
@@ -26,6 +33,10 @@ public class AddRecordActivity extends AppCompatActivity {
     Record currRecord;
 
     EditText[] fields;
+
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+
+    Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +56,8 @@ public class AddRecordActivity extends AppCompatActivity {
                 (EditText) findViewById(R.id.comment_field)
         };
 
+        EditTextDatePicker date = new EditTextDatePicker(this, R.id.date_field);
+
 
     }
 
@@ -57,9 +70,9 @@ public class AddRecordActivity extends AppCompatActivity {
         String mode = getIntent().getStringExtra("EXTRA_MODE");
 
         // Apply Date filter to date_field
-        if (fields[1] != null) {
-            fields[1].setFilters(new InputFilter[]{new DateFilter()});
-        }
+//        if (fields[1] != null) {
+//            fields[1].setFilters(new InputFilter[]{new DateFilter()});
+//        }
         /**
          * Apply decimal filter to number fields,
          * digitsBeforeZero set to 4, since realistically no size should need even close
@@ -74,7 +87,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
         if (mode.equals("v") || mode.equals("e")) {
             fields[0].setText(currRecord.getName());
-            fields[1].setText(currRecord.getDate() == null ? "" :android.text.format.DateFormat.format("yyyy-mm-dd", currRecord.getDate()));
+            fields[1].setText(currRecord.getDate() == null ? "" : simpleDateFormat.format(currRecord.getDate()));
             fields[2].setText(currRecord.getNeck() < 0 ? "" : String.format("%d", currRecord.getNeck()));
             fields[3].setText(currRecord.getBust() < 0 ? "" : String.format("%d", currRecord.getBust()));
             fields[4].setText(currRecord.getChest() < 0 ? "" : String.format("%d", currRecord.getChest()));
@@ -117,7 +130,13 @@ public class AddRecordActivity extends AppCompatActivity {
         }
         else if (id == R.id.action_save){
             Record record = new Record( fields[0].getText().toString());
-            record.setDate(new Date());
+            String date_str = fields[1].getText().toString();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                record.setDate(date_str.equals("") ? new Date() : sdf.parse(date_str));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             String neck = fields[2].getText().toString();
             record.setNeck(neck.equals("") ? -1 : Integer.parseInt(neck));
             String bust = fields[3].getText().toString();
