@@ -19,8 +19,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecordActivity"
-            android:label="Add a new Record"></activity>
+            android:name=".AddRecordActivity"
+            android:label="@string/add_record_label">
+        </activity>
     </application>
 
 </manifest>
