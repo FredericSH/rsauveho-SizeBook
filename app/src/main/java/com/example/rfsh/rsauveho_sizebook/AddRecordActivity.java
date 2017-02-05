@@ -129,7 +129,10 @@ public class AddRecordActivity extends AppCompatActivity {
             }
         }
         else if (id == R.id.action_save){
-            Record record = new Record( fields[0].getText().toString());
+            Record record = new Record(fields[0].getText().toString());
+            if (record.getName().equals("")) {
+                finish();
+            }
             String date_str = fields[1].getText().toString();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
