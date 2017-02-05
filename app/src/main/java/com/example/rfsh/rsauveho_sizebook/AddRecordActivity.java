@@ -69,10 +69,6 @@ public class AddRecordActivity extends AppCompatActivity {
 
         String mode = getIntent().getStringExtra("EXTRA_MODE");
 
-        // Apply Date filter to date_field
-//        if (fields[1] != null) {
-//            fields[1].setFilters(new InputFilter[]{new DateFilter()});
-//        }
         /**
          * Apply decimal filter to number fields,
          * digitsBeforeZero set to 4, since realistically no size should need even close
