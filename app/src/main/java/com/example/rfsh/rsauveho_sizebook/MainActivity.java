@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -51,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         storedRecordList = (ListView) findViewById(R.id.recordList);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        /**
+         * On item click, go into view mode for specific Record
+         */
         storedRecordList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
 
                 // mode of the addRecordActivity e: edit record a: add new record v: view record
+                Log.i("GOT TO ", "ON CLICK");
                 intent.putExtra("EXTRA_MODE", "v");
                 intent.putExtra("SELECTED_RECORD_POS", position);
                 intent.putExtra("SELECTED_RECORD", selected);
@@ -67,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * On item long click go into edit mode for specific Record
+         */
         storedRecordList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -74,15 +82,19 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
 
+                Log.i("GOT TO ", "ON LONG CLICK");
                 intent.putExtra("EXTRA_MODE", "e");
                 intent.putExtra("SELECTED_RECORD_POS", position);
                 intent.putExtra("SELECTED_RECORD", selected);
 
                 startActivityForResult(intent, REQUEST_CODE);
-                return false;
+                return true;
             }
         });
 
+        /**
+         * Floating action button adds a new Record
+         */
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,6 +119,12 @@ public class MainActivity extends AppCompatActivity {
         updateCounter();
     }
 
+    /**
+     * Called when Activity is returned to with a result
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE) {
@@ -139,6 +157,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Loads records from file
+     */
     private void loadRecords() {
         try {
             FileInputStream fileInputStream = openFileInput(FILENAME);
@@ -155,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Save records to file
+     */
     private void saveRecords() {
         try {
             FileOutputStream fileOutputStream = openFileOutput(FILENAME, Context.MODE_PRIVATE);

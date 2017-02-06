@@ -1,6 +1,5 @@
 package com.example.rfsh.rsauveho_sizebook;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -88,7 +86,7 @@ public class AddRecordActivity extends AppCompatActivity {
             fields[7].setText(currRecord.getInseam() < 0 ? "" :String.format("%d", currRecord.getInseam()));
             fields[8].setText(currRecord.getComment());
         }
-        else if (mode.equals("v")) {
+        if (mode.equals("v")) {
             for (EditText E : fields) {
                 if (E != null) {
                     E.setEnabled(false);
