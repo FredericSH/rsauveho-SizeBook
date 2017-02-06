@@ -136,7 +136,7 @@ public class AddRecordActivity extends AppCompatActivity {
              */
             Record record = new Record(fields[0].getText().toString());
             if (record.getName().equals("")) {
-                finish();
+                fields[0].setError("Name is mandatory");
             }
             /**
              * Handle date string output
@@ -181,7 +181,9 @@ public class AddRecordActivity extends AppCompatActivity {
                 intent.putExtra("RETURN_RECORD_POS", getIntent().getIntExtra("SELECTED_RECORD_POS", 0));
             }
             setResult(RESULT_OK, intent);
-            finish();
+            if (!record.getName().equals("")) {
+                finish();
+            }
 
         }
         else if (id == R.id.action_delete) {

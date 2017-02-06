@@ -36,4 +36,4 @@ captures/
 *.iml
 .idea/workspace.xml
 
-# Keystore files
+.DS_Store
