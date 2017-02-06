@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by rfsh on 2017-01-27.
+ * Record class, contains all info for a record, toString returns the Record's imporant information
+ * to display
  */
 
 public class Record implements Serializable{
@@ -104,7 +105,7 @@ public class Record implements Serializable{
         this.waist = waist;
         this.hip = hip;
         this.inseam = inseam;
-        this.comment = comment != null ? comment : new String();
+        this.comment = comment;
     }
 
     public String toString() {

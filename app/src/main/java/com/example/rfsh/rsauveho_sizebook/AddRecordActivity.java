@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Activity to add/view/edit Record
+ */
 public class AddRecordActivity extends AppCompatActivity {
 
     private static final String FILENAME = "size_book_saves.sav";
@@ -38,6 +41,7 @@ public class AddRecordActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_record);
 
+        // amalgamate all fields into list
         fields = new EditText[]{
                 (EditText) findViewById(R.id.name_field),
                 (EditText) findViewById(R.id.date_field),
@@ -75,6 +79,9 @@ public class AddRecordActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * check for mode, and check if entries need to be output as empty
+         */
         if (mode.equals("v") || mode.equals("e")) {
             fields[0].setText(currRecord.getName());
             fields[1].setText(currRecord.getDate() == null ? "" : simpleDateFormat.format(currRecord.getDate()));
@@ -86,6 +93,9 @@ public class AddRecordActivity extends AppCompatActivity {
             fields[7].setText(currRecord.getInseam() < 0 ? "" :String.format("%d", currRecord.getInseam()));
             fields[8].setText(currRecord.getComment());
         }
+        /**
+         * Make edittexts uneditable if in view mode
+         */
         if (mode.equals("v")) {
             for (EditText E : fields) {
                 if (E != null) {
@@ -119,10 +129,16 @@ public class AddRecordActivity extends AppCompatActivity {
             }
         }
         else if (id == R.id.action_save){
+            /**
+             * if name is empty and save is selected, don't save
+             */
             Record record = new Record(fields[0].getText().toString());
             if (record.getName().equals("")) {
                 finish();
             }
+            /**
+             * Handle date string output
+             */
             String date_str = fields[1].getText().toString();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
@@ -130,6 +146,11 @@ public class AddRecordActivity extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+            /**
+             * Check if each field is null, and return a suitable value in fields
+             * for numeric fields -1 means a null value
+             */
             String neck = fields[2].getText().toString();
             record.setNeck(neck.equals("") ? -1 : Integer.parseInt(neck));
             String bust = fields[3].getText().toString();
@@ -146,6 +167,9 @@ public class AddRecordActivity extends AppCompatActivity {
 
             Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
 
+            /**
+             * Return to Main with result
+             */
             intent.putExtra("RETURN_RECORD", record);
             if (getIntent().getStringExtra("EXTRA_MODE").equals("a")) {
                 intent.putExtra("ACTION", "add");
@@ -167,6 +191,9 @@ public class AddRecordActivity extends AppCompatActivity {
         }
         // might not want to use this button
         else if (id == R.id.action_delete_all) {
+            /**
+             * write empty ArrayList to file
+             */
             ArrayList<Record> recordList;
             try {
                 FileOutputStream fileOutputStream = openFileOutput(FILENAME, Context.MODE_PRIVATE);
