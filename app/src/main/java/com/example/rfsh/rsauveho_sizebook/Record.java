@@ -111,7 +111,7 @@ public class Record implements Serializable{
     public String toString() {
         return  "Name: " + name + "\n" +
                 (bust < 0 ? "" : ("Bust: " + bust + "\n")) +
-                (chest < 0 ? "" : ("Chest: " + chest + "\n)")) +
+                (chest < 0 ? "" : ("Chest: " + chest + "\n")) +
                 (waist < 0 ? "" : ("Waist: " + waist + "\n")) +
                 (inseam < 0 ? "" : ("Inseam: " + inseam));
     }

@@ -101,6 +101,7 @@ public class AddRecordActivity extends AppCompatActivity {
                 if (E != null) {
                     E.setEnabled(false);
                     E.setFocusable(false);
+                    E.setFocusableInTouchMode(false);
                 }
             }
         }
@@ -125,6 +126,7 @@ public class AddRecordActivity extends AppCompatActivity {
                 if (E != null) {
                     E.setEnabled(true);
                     E.setFocusable(true);
+                    E.setFocusableInTouchMode(true);
                 }
             }
         }
