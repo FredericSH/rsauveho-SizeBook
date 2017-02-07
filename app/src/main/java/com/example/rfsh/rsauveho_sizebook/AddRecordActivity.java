@@ -188,7 +188,7 @@ public class AddRecordActivity extends AppCompatActivity {
         }
         else if (id == R.id.action_delete) {
             // If in add mode, don't do any deletions
-            if (getIntent().getStringExtra("EXTRA_MODE").equals("a")) {
+            if (!getIntent().getStringExtra("EXTRA_MODE").equals("a")) {
                 Intent intent = new Intent(AddRecordActivity.this, MainActivity.class);
 
                 intent.putExtra("ACTION", "delete");
